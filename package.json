@@ -1,21 +1,22 @@
 {
-  "name": "javascript-action",
-  "description": "GitHub Actions JavaScript Template",
+  "name": "setup-oras-action",
+  "description": "Setup ORAS CLI for GitHub Actions",
   "version": "0.0.0",
   "author": "",
   "private": true,
-  "homepage": "https://github.com/actions/javascript-action#readme",
+  "homepage": "https://github.com/balena-io-experimental/setup-oras-action#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/javascript-action.git"
+    "url": "git+https://github.com/balena-io-experimental/setup-oras-action.git"
   },
   "bugs": {
-    "url": "https://github.com/actions/javascript-action/issues"
+    "url": "https://github.com/balena-io-experimental/setup-oras-action/issues"
   },
   "keywords": [
     "GitHub",
     "Actions",
-    "JavaScript"
+    "JavaScript",
+    "ORAS"
   ],
   "exports": {
     ".": "./dist/index.js"
@@ -64,7 +65,8 @@
     ]
   },
   "dependencies": {
-    "@actions/core": "^1.11.1"
+    "@actions/core": "^1.11.1",
+    "@actions/tool-cache": "^2.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",

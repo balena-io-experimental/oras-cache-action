@@ -1,18 +1,16 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'setup-oras-action'
+description: 'Setup ORAS CLI for GitHub Actions'
+author: 'Balena <hello@balena.io>'
 
-# Define your inputs here.
 inputs:
-  milliseconds:
-    description: 'Your input description here'
-    required: true
-    default: '1000'
+  version:
+    description: 'The ORAS CLI release to install'
+    required: false
+    default: ' 1.2.0'
 
-# Define your outputs here.
 outputs:
-  time:
-    description: 'Your output description here'
+  version:
+    description: 'The ORAS CLI release that was installed'
 
 runs:
   using: node20
