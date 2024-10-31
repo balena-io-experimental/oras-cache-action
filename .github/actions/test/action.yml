@@ -13,4 +13,4 @@ runs:
         echo "Installed version: ${{ steps.setup-oras-cli.outputs.version }}"
     - name: Test CLI
       shell: bash
-      run: oras --version
+      run: oras version
