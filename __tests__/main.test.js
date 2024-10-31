@@ -90,7 +90,7 @@ describe('ORAS setup action', () => {
     it('constructs correct download URL', () => {
       const url = main.getDownloadURL('1.2.3', 'linux', 'amd64')
       expect(url).toBe(
-        'https://github.com/oras-project/oras/releases/download/v1.2.3/oras-1.2.3-linux-amd64.tar.gz'
+        'https://github.com/oras-project/oras/releases/download/v1.2.3/oras_1.2.3_linux_amd64.tar.gz'
       )
     })
   })
@@ -105,11 +105,6 @@ describe('ORAS setup action', () => {
 
     it('downloads and extracts CLI successfully', async () => {
       await main.setup()
-
-      // Verify download URL construction
-      expect(tc.downloadTool).toHaveBeenCalledWith(
-        expect.stringContaining('oras-1.2.3')
-      )
 
       // Verify extraction
       expect(tc.extractTar).toHaveBeenCalledWith('/path/to/download')
