@@ -1,0 +1,16 @@
+# https://docs.github.com/en/actions/creating-actions/creating-a-composite-action
+name: 'Custom tests'
+description: 'Run custom tests'
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup ORAS CLI
+      uses: ./
+      id: setup-oras-cli
+    - name: Print outputs
+      shell: bash
+      run: |
+        echo "Installed version: ${{ steps.setup-oras-cli.outputs.version }}"
+    - name: Test CLI
+      shell: bash
+      run: oras --version

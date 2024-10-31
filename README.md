@@ -1,6 +1,7 @@
 # Setup ORAS CLI for GitHub Actions
 
-Use this action to install the [ORAS CLI](https://oras.land/) in your GitHub Actions workflow.
+Use this action to install the [ORAS CLI](https://oras.land/) in your GitHub
+Actions workflow.
 
 ## Usage
 
@@ -15,7 +16,8 @@ To use this action in your workflow, add the following step:
 
 ### Inputs
 
-- `version`: The ORAS CLI release to install. See available releases [here](https://github.com/oras-project/oras/releases).
+- `version`: The ORAS CLI release to install. See available releases
+  [here](https://github.com/oras-project/oras/releases).
 
 ### Outputs
 
