@@ -21,6 +21,7 @@ To use this action in your workflow, add the following step:
 
 ### Outputs
 
+- `path`: The path where the ORAS CLI was installed.
 - `version`: The ORAS CLI release that was installed.
 
 ## Contributing

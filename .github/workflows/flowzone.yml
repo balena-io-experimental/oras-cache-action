@@ -25,3 +25,11 @@ jobs:
     secrets: inherit
     with:
       restrict_custom_actions: false
+      custom_test_matrix: >
+        {
+          "os": [
+            ["ubuntu-latest"],
+            ["macos-latest"],
+            ["windows-latest"]
+          ],
+        }

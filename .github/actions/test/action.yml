@@ -9,8 +9,7 @@ runs:
       id: setup-oras-cli
     - name: Print outputs
       shell: bash
-      run: |
-        echo "Installed version: ${{ steps.setup-oras-cli.outputs.version }}"
+      run: echo "${{ toJSON(steps.setup-oras-cli.outputs) }}"
     - name: Test CLI
       shell: bash
       run: oras version

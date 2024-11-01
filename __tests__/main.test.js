@@ -93,6 +93,40 @@ describe('ORAS setup action', () => {
         'https://github.com/oras-project/oras/releases/download/v1.2.3/oras_1.2.3_linux_amd64.tar.gz'
       )
     })
+    it('constructs correct download URL for windows', () => {
+      const url = main.getDownloadURL('1.2.3', 'windows', 'amd64')
+      expect(url).toBe(
+        'https://github.com/oras-project/oras/releases/download/v1.2.3/oras_1.2.3_windows_amd64.zip'
+      )
+    })
+  })
+
+  describe('execVersion', () => {
+    it('executes version command', async () => {
+      const exec = require('@actions/exec')
+      exec.getExecOutput = jest.fn().mockResolvedValue({
+        exitCode: 0,
+        stdout: 'Version: 1.2.3',
+        stderr: ''
+      })
+
+      await main.execVersion()
+
+      expect(exec.getExecOutput).toHaveBeenCalledWith('oras', ['version'])
+    })
+
+    it('handles version command failure', async () => {
+      const exec = require('@actions/exec')
+      // exec.getExecOutput.mockRejectedValue(new Error('Version command failed'))
+
+      exec.getExecOutput = jest.fn().mockResolvedValue({
+        exitCode: 1,
+        stdout: '',
+        stderr: 'Version command failed'
+      })
+
+      await expect(main.execVersion()).rejects.toThrow('Version command failed')
+    })
   })
 
   describe('setup', () => {
@@ -101,6 +135,12 @@ describe('ORAS setup action', () => {
       tc.downloadTool.mockResolvedValue('/path/to/download')
       tc.extractTar.mockResolvedValue('/path/to/cli')
       core.getInput.mockReturnValue('1.2.3')
+      const exec = require('@actions/exec')
+      exec.getExecOutput = jest.fn().mockResolvedValue({
+        exitCode: 0,
+        stdout: 'Version: 1.2.3',
+        stderr: ''
+      })
     })
 
     it('downloads and extracts CLI successfully', async () => {
@@ -111,6 +151,12 @@ describe('ORAS setup action', () => {
 
       // Verify PATH addition
       expect(core.addPath).toHaveBeenCalledWith('/path/to/cli')
+
+      // Verify path output is set
+      expect(core.setOutput).toHaveBeenCalledWith('path', '/path/to/cli')
+
+      // Verify version output is set
+      expect(core.setOutput).toHaveBeenCalledWith('version', '1.2.3')
     })
 
     it('handles download failure', async () => {
