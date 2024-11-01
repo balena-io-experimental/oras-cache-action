@@ -6067,8 +6067,11 @@ const tc = __nccwpck_require__(472)
 
 function getDownloadURL(version, platform, arch) {
   // Construct the download URL
+  // See: https://github.com/oras-project/oras/releases/tag/v1.2.0
   // e.g. https://github.com/oras-project/oras/releases/download/v1.2.0/oras_1.2.0_linux_arm64.tar.gz
-  return `https://github.com/oras-project/oras/releases/download/v${version}/oras_${version}_${platform}_${arch}.tar.gz`
+  // e.g. https://github.com/oras-project/oras/releases/download/v1.2.0/oras_1.2.0_windows_amd64.zip
+  const extension = platform === 'windows' ? 'zip' : 'tar.gz'
+  return `https://github.com/oras-project/oras/releases/download/v${version}/oras_${version}_${platform}_${arch}.${extension}`
 }
 
 function getVersion() {

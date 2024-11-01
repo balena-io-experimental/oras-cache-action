@@ -93,18 +93,22 @@ describe('ORAS setup action', () => {
         'https://github.com/oras-project/oras/releases/download/v1.2.3/oras_1.2.3_linux_amd64.tar.gz'
       )
     })
+    it('constructs correct download URL for windows', () => {
+      const url = main.getDownloadURL('1.2.3', 'windows', 'amd64')
+      expect(url).toBe(
+        'https://github.com/oras-project/oras/releases/download/v1.2.3/oras_1.2.3_windows_amd64.zip'
+      )
+    })
   })
 
   describe('execVersion', () => {
     it('executes version command', async () => {
       const exec = require('@actions/exec')
-      exec.getExecOutput = jest
-        .fn()
-        .mockResolvedValue({
-          exitCode: 0,
-          stdout: 'Version: 1.2.3',
-          stderr: ''
-        })
+      exec.getExecOutput = jest.fn().mockResolvedValue({
+        exitCode: 0,
+        stdout: 'Version: 1.2.3',
+        stderr: ''
+      })
 
       await main.execVersion()
 
@@ -132,13 +136,11 @@ describe('ORAS setup action', () => {
       tc.extractTar.mockResolvedValue('/path/to/cli')
       core.getInput.mockReturnValue('1.2.3')
       const exec = require('@actions/exec')
-      exec.getExecOutput = jest
-        .fn()
-        .mockResolvedValue({
-          exitCode: 0,
-          stdout: 'Version: 1.2.3',
-          stderr: ''
-        })
+      exec.getExecOutput = jest.fn().mockResolvedValue({
+        exitCode: 0,
+        stdout: 'Version: 1.2.3',
+        stderr: ''
+      })
     })
 
     it('downloads and extracts CLI successfully', async () => {
