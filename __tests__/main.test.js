@@ -95,12 +95,42 @@ describe('ORAS setup action', () => {
     })
   })
 
+  describe('execVersion', () => {
+    it('executes version command', async () => {
+      const exec = require('@actions/exec')
+      exec.getExecOutput = jest
+        .fn()
+        .mockResolvedValue({ exitCode: 0, stdout: '1.2.3', stderr: '' })
+
+      await main.execVersion()
+
+      expect(exec.getExecOutput).toHaveBeenCalledWith('oras', ['version'])
+    })
+
+    it('handles version command failure', async () => {
+      const exec = require('@actions/exec')
+      // exec.getExecOutput.mockRejectedValue(new Error('Version command failed'))
+
+      exec.getExecOutput = jest.fn().mockResolvedValue({
+        exitCode: 1,
+        stdout: '',
+        stderr: 'Version command failed'
+      })
+
+      await expect(main.execVersion()).rejects.toThrow('Version command failed')
+    })
+  })
+
   describe('setup', () => {
     beforeEach(() => {
       // Mock successful download and extraction
       tc.downloadTool.mockResolvedValue('/path/to/download')
       tc.extractTar.mockResolvedValue('/path/to/cli')
       core.getInput.mockReturnValue('1.2.3')
+      const exec = require('@actions/exec')
+      exec.getExecOutput = jest
+        .fn()
+        .mockResolvedValue({ exitCode: 0, stdout: '1.2.3', stderr: '' })
     })
 
     it('downloads and extracts CLI successfully', async () => {
@@ -111,6 +141,12 @@ describe('ORAS setup action', () => {
 
       // Verify PATH addition
       expect(core.addPath).toHaveBeenCalledWith('/path/to/cli')
+
+      // Verify path output is set
+      expect(core.setOutput).toHaveBeenCalledWith('path', '/path/to/cli')
+
+      // Verify version output is set
+      expect(core.setOutput).toHaveBeenCalledWith('version', '1.2.3')
     })
 
     it('handles download failure', async () => {

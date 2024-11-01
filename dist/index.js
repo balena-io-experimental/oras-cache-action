@@ -6114,6 +6114,18 @@ function getPlatform() {
   }
 }
 
+// Call the tool to print the version
+async function execVersion() {
+  const exec = __nccwpck_require__(236)
+  const { exitCode, stdout, stderr } = await exec.getExecOutput('oras', [
+    'version'
+  ])
+  if (exitCode !== 0) {
+    throw new Error(stderr)
+  }
+  return stdout
+}
+
 async function setup() {
   const version = getVersion()
   const platform = getPlatform()
@@ -6129,6 +6141,11 @@ async function setup() {
 
   // Expose the tool by adding it to the PATH
   core.addPath(pathToCLI)
+
+  const versionOutput = await execVersion()
+
+  core.setOutput('path', pathToCLI)
+  core.setOutput('version', versionOutput.trim())
 }
 
 module.exports = {
@@ -6136,7 +6153,8 @@ module.exports = {
   getVersion,
   getPlatform,
   getArch,
-  getDownloadURL
+  getDownloadURL,
+  execVersion
 }
 
 
