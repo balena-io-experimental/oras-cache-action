@@ -1,0 +1,13 @@
+- commits:
+    - subject: Initial code changes to setup ORAS CLI
+      hash: 044c15add695e25e9c6e48e9de34b480e98056ed
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+  version: 0.0.2
+  title: ""
+  date: 2024-11-01T13:22:53.084Z
