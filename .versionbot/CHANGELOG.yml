@@ -1,4 +1,17 @@
 - commits:
+    - subject: Populate action outputs for path and version
+      hash: 7611bcfb2637f474a56c23a9e2212350cc7255f9
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+  version: 0.0.3
+  title: ""
+  date: 2024-11-01T15:44:44.013Z
+- commits:
     - subject: Initial code changes to setup ORAS CLI
       hash: 044c15add695e25e9c6e48e9de34b480e98056ed
       body: ""

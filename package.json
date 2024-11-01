@@ -1,7 +1,7 @@
 {
   "name": "setup-oras-action",
   "description": "Setup ORAS CLI for GitHub Actions",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "",
   "private": true,
   "homepage": "https://github.com/balena-io-experimental/setup-oras-action#readme",
@@ -86,6 +86,6 @@
     "prettier": "^3.3.3"
   },
   "versionist": {
-    "publishedAt": "2024-11-01T13:22:53.117Z"
+    "publishedAt": "2024-11-01T15:44:44.048Z"
   }
 }
