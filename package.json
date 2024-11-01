@@ -1,21 +1,22 @@
 {
-  "name": "javascript-action",
-  "description": "GitHub Actions JavaScript Template",
+  "name": "setup-oras-action",
+  "description": "Setup ORAS CLI for GitHub Actions",
   "version": "0.0.0",
   "author": "",
   "private": true,
-  "homepage": "https://github.com/actions/javascript-action#readme",
+  "homepage": "https://github.com/balena-io-experimental/setup-oras-action#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/javascript-action.git"
+    "url": "git+https://github.com/balena-io-experimental/setup-oras-action.git"
   },
   "bugs": {
-    "url": "https://github.com/actions/javascript-action/issues"
+    "url": "https://github.com/balena-io-experimental/setup-oras-action/issues"
   },
   "keywords": [
     "GitHub",
     "Actions",
-    "JavaScript"
+    "JavaScript",
+    "ORAS"
   ],
   "exports": {
     ".": "./dist/index.js"
@@ -32,10 +33,12 @@
     "lint": "npx eslint . -c ./.github/linters/.eslintrc.yml",
     "package": "npx ncc build src/index.js -o dist --source-map --license licenses.txt",
     "package:watch": "npm run package -- --watch",
-    "test": "npx jest",
-    "all": "npm run format:write && npm run lint && npm run test && npm run coverage && npm run package"
+    "test": "npx jest && npm run check-dist",
+    "all": "npm run format:write && npm run lint && npm run test && npm run coverage && npm run package",
+    "prepare": "husky",
+    "check-dist": "npm run bundle && git diff --exit-code dist || { echo 'Files in dist are out-of-date!' ; exit 1 ; }"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "eslintConfig": {
     "extends": "./.github/linters/.eslintrc.yml"
   },
@@ -64,7 +67,8 @@
     ]
   },
   "dependencies": {
-    "@actions/core": "^1.11.1"
+    "@actions/core": "^1.11.1",
+    "@actions/tool-cache": "^2.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
@@ -76,6 +80,7 @@
     "eslint": "^8.57.1",
     "eslint-plugin-github": "^5.0.2",
     "eslint-plugin-jest": "^28.8.3",
+    "husky": "^9.1.6",
     "jest": "^29.7.0",
     "make-coverage-badge": "^1.2.0",
     "prettier": "^3.3.3"
