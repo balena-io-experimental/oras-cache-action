@@ -100,7 +100,11 @@ describe('ORAS setup action', () => {
       const exec = require('@actions/exec')
       exec.getExecOutput = jest
         .fn()
-        .mockResolvedValue({ exitCode: 0, stdout: '1.2.3', stderr: '' })
+        .mockResolvedValue({
+          exitCode: 0,
+          stdout: 'Version: 1.2.3',
+          stderr: ''
+        })
 
       await main.execVersion()
 
@@ -130,7 +134,11 @@ describe('ORAS setup action', () => {
       const exec = require('@actions/exec')
       exec.getExecOutput = jest
         .fn()
-        .mockResolvedValue({ exitCode: 0, stdout: '1.2.3', stderr: '' })
+        .mockResolvedValue({
+          exitCode: 0,
+          stdout: 'Version: 1.2.3',
+          stderr: ''
+        })
     })
 
     it('downloads and extracts CLI successfully', async () => {

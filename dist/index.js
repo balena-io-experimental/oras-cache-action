@@ -6123,7 +6123,7 @@ async function execVersion() {
   if (exitCode !== 0) {
     throw new Error(stderr)
   }
-  return stdout
+  return stdout.match(/Version:\s*([\d.]+)/)[1]
 }
 
 async function setup() {
